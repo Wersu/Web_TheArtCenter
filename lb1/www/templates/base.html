@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/left-nav-style.css">
+    <link rel="icon" type="image/png" href="../static/images/icons/icon1.png"/>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="../static/javascripts/jquery-3.6.0.min.js"></script>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <input type="checkbox" id="nav-toggle" hidden>
+	<nav class="nav">
+		<label for="nav-toggle" class="nav-toggle" onclick></label>
+
+		<ul>
+            {% for nav_element in navmenu %}
+            <li><a href="{{nav_element.addr}}">{{ nav_element.name }}</a>
+            {% endfor %}
+		 </ul>
+	</nav>
+
+	<div class="mask-content"></div>
+
+    <header class="wrapper">
+        <a href="index" ><img src="../static/images/logo.png" margin: 10px alt="logo"></a>
+        {% if current_user.is_authenticated: %}
+        <div style="display: flex; flex-direction: row; gap:25px">
+            <span class="logButton">{{ current_user.login }}</span>
+            <a href="/logout" class="logButton">Выйти</a>
+        </div>
+        {% else %}
+        <div style="display: flex; flex-direction: row; gap:25px">
+            <a href="/login" class="logButton">Войти</a>
+            <a href="/reg" class="logButton">Регистрация</a>
+        </div>
+        {% endif %}
+    </header>
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div class="footer">
+            <div id="social">
+                <h3>Контакты:</h3>
+                <div class="icon">
+                    <a href="https://mail.google.com/mail/"><img src="../static/images/google.png"></a>
+                    <a href="https://vk.com/"><img src="../static/images/vk.png"></a>
+                    <a href="https://telegram.org/"><img src="../static/images/telegram.png"></a>
+                </div>
+            </div>
+            <div id="footer-logo">
+                <a href="index"><img src="../static/images/logo.png" alt="logo"></a>
+            </div>
+        </div>
+    </footer>		
+</body>
+</html>

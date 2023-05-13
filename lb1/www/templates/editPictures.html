@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block body %}
+		<div>
+			<div>
+				<img src="../static/images/BG/addPictures/AddPicture2.jpg" width=100% alt="add pictures bg">
+			</div>
+			{% include 'middlenav.html' %}
+			{% include 'logs.html' %}
+				<main>
+					{% if imageModel: %}
+					<div class="addPicturesConteiner">
+						<form id="addPicForm">
+							<fieldset>
+							  <legend>Хотите изменить картину?</legend>
+							  <div class="container-column-centered">
+							  <label for="namePic"></label><input type="text" name="namePic" placeholder="Название картины" class="addForm" value="{{ imageModel.artName }}">
+							  <label for="nameArt"></label><input type="text" name="nameArt" placeholder="Имя автора" class="addForm" value="{{ imageModel.artistName }}">
+							  <label for="yearOfCreation"></label><input type="number" step="1" name="yearOfCreation" placeholder="Год создания" class="addForm" value="{{ imageModel.year }}">
+							  <label for="filePic"></label><input type="file" name="filePic" extension = "image/jpeg" onchange="onUploadFile(event)" placeholder="Файл картины" class="addForm">
+							  </div>
+							</fieldset>
+						</form>	
+					</div>
+					<div class="container-row-centered" style="width: 40vw; margin: auto;">
+						<button type="button" onclick="formRemove()" class="addPicButton" style="background-color: rgba(255, 0, 0, 0.719);">Удалить</button>
+						<button type="button" onclick="formUpdate()" class="addPicButton">Изменить</button>
+					</div>
+					<div style="height: 30px;"></div>
+					{% else %}
+					<div class="text-picture-notfound">
+						Картина не найдена
+					</div>
+					{% endif %}
+			</main>
+		</div>	
+
+		<script type="text/javascript">
+
+			const reader = new FileReader();
+			const fileByteArray = [];
+
+			var imageID = {{ imageModel.id }};
+
+			var uploadedFileName = '{{ imageModel.fileName }}';
+
+			function onUploadFile(event)
+			{
+				uploadedFileName = event.target.files[0].name;
+
+				reader.readAsArrayBuffer(uploadedFile);
+  				reader.onloadend = (evt) => {
+    			if (evt.target.readyState === FileReader.DONE) {
+      				const arrayBuffer = evt.target.result,
+        			array = new Uint8Array(arrayBuffer);
+      				for (const a of array) {
+        				fileByteArray.push(a);
+      				}
+   				}
+				}
+			}
+
+			function formRemove()
+			{
+				$.ajax({
+					url: '/api/deletepicture',
+					method: 'DELETE', 
+					data: { 
+						id: imageID
+					},
+					success: function(data)
+					{
+						alert(data.message);
+						location.reload();
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown)
+					{
+						alert(errorThrown);
+					}
+				});
+			}
+
+			function formUpdate() {
+				let picInput = document.getElementsByName('namePic')[0].value;
+				let artInput = document.getElementsByName('nameArt')[0].value;
+				let yearInput = document.getElementsByName('yearOfCreation')[0].value;
+
+				if(!picInput || !artInput || !yearInput)
+				{
+					alert("Нужно заполнить все поля");
+					return;
+				}
+				
+				var jsonData = JSON.stringify({ picture: picInput, artist: artInput, year: yearInput,filename: uploadedFileName, file: fileByteArray});
+
+				$.ajax({
+					url: '/api/editpicture',
+					method: 'PUT', 
+					data: { 
+						id: imageID,
+						json: jsonData
+					},
+					success: function(data)
+					{
+						alert(data.message);
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown)
+					{
+						alert(errorThrown);
+					}
+				});
+			}
+		</script>
+{% endblock %}

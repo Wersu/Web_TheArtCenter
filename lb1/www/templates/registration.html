@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+		<div>
+			<div>
+				<img src="../static/images/BG/addPictures/AddPicture4.jpg" width=100% alt="main page">
+			</div>
+			{% include 'middlenav.html' %}
+				<main>
+					<div class="authContainer">
+						<form id="addPicForm">
+							<fieldset>
+							  <legend>Регистрация</legend>
+							  	<label for="login"></label><input type="text" name="login" placeholder="Логин" class="addForm">
+							  	<label for="password"></label><input type="password" name="password" placeholder="Пароль" class="addForm">
+							</fieldset>
+						</form>						
+					</div>
+
+					<div class="container-row-centered" style="justify-content: center; gap:50px">
+						<button type="button" onclick="regSubmit()" class="addPicButton" style="width: 300px;">Зарегестрироваться</button>  
+					</div>	
+					<div style="height: 30px;"></div>
+			</main>
+		</div>	
+
+		<script type="text/javascript">
+
+		function regSubmit() {
+				let loginInput = document.getElementsByName('login')[0].value;
+				let passwordInput = document.getElementsByName('password')[0].value;
+
+				if(!loginInput || !passwordInput)
+				{
+					alert("Нужно заполнить все поля");
+					return;
+				}
+
+				$.ajax({
+					url: '/api/reg',
+					method: 'POST', 
+					data: { 
+						login: loginInput,
+						password: passwordInput
+					},
+					success: function(data)
+					{
+						open('/index', '_self')
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown)
+					{
+						alert(JSON.parse(XMLHttpRequest.responseText).message);
+					}
+				});
+			}
+		</script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block body %}
+		<span id="big-pic"></span>
+
+		<div>
+			<div>
+				<h1>Картины</h1><img src="../static/images/BG/pictures/BGVar3.jpg" width=100% alt="pictures page BG">
+			</div>
+			{% include 'middlenav.html' %}
+			<main>
+				<article class="paintGallery">
+					<section class="paint">
+						{% for image in l1 %}
+						<a class="art">
+							<img src="../static/images/pictures/{{image.fileName}}" alt="{{image.artName}}" imgId="{{image.id}}">
+							<div>
+								<p1>Автор: {{image.artistName}}</p1>
+								<p2>{{image.artName}}</p2>
+								<p3>Год: {{image.year}}</p3>
+							</div>
+						</a>
+						<!--<a><img src="../static/images/pictures/Mona_Lisa.jpg" alt="Mona_Lisa"><div><p1>Автор: Леонардо да Винчи</p1><p2>Мона Лиза</p2><p3>Год: 1505</p3></div></a>
+						<a><img src="../static/images/pictures/Sunday_afternoon_on_the_island.jpg" alt="Sunday_afternoon_on_the_island"><div><p1>Автор: Жорж-Пьер Сёра</p1><p2>Воскресный день на острове Гранд-Жатт</p2><p3>Год: 1884</p3></div></a>
+						<a><img src="../static/images/pictures/The_girl_with_peaches.jpg" alt="The_girl_with_peaches"><div><p1>Автор: Валентин Серов</p1><p2>Девочка с персиками</p2><p3>Год: 1887</p3></div></a>
+						<a><img src="../static/images/pictures/The_Great_Wave_off_Kanagawa.jpg" alt="The_Great_Wave_off_Kanagawa"><div><p1>Автор: Кацусика Хокусай</p1><p2>Большая волна в Канагаве</p2><p3>Год: 1823</p3></div></a>
+						<a><img src="../static/images/pictures/TheSonOfMan.jpg" alt="TheSonOfMan"><div><p1>Автор: Рене Магритт</p1><p2>Сын человеческий</p2><p3>Год: 1964</p3></div></a>
+						<a><img src="../static/images/pictures/Morning_in_a_Pine_Forest.jpg" alt="Morning_in_a_Pine_Forest"><div><p1>Автор: Иван Шишкин</p1><p2>Утро в сосновом лесу</p2><p3>Год: 1889</p3></div></a>
+						<a><img src="../static/images/pictures/The_Kiss.jpg" alt="The_Kiss"><div><p1>Автор: Густав Климт</p1><p2>Поцелуй</p2><p3>Год: 1908</p3></div></a>
+						<a><img src="../static/images/pictures/Suprematist_Composition.jpg" alt="Suprematist_Composition"><div><p1>Автор: Казимир Малевич</p1><p2>Супрематическая композиция</p2><p3>Год: 1916</p3></div></a>
+						<a><img src="../static/images/pictures/Bride_of_the_Wind.jpg" alt="Bride_of_the_Wind"><div><p1>Автор: Оскар Кокошка</p1><p2>Невеста ветра</p2><p3>Год: 1913</p3></div></a>
+						<a><img src="../static/images/pictures/Bildnis_Adele_Bloch-Bauer II.jpg" alt="Bildnis_Adele_Bloch-Bauer II"><div><p1>Автор: Густав Климт</p1><p2>Портрет Адели Блох-Бауэр II</p2><p3>Год: 1912</p3></div></a>
+						<a><img src="../static/images/pictures/Portrait_of_a_Woman.jpg" alt="Portrait_of_a_Woman"><div><p1>Автор: Иван Крамской</p1><p2>Неизвестная</p2><p3>Год: 1883</p3></div></a>-->
+						{% endfor %}
+					</section>
+					<section class="paint">
+						{% for image in l2 %}
+						<a class="art">
+							<img src="../static/images/pictures/{{image.fileName}}" alt="{{image.artName}}" imgId="{{image.id}}">
+							<div>
+								<p1>Автор: {{image.artistName}}</p1>
+								<p2>{{image.artName}}</p2>
+								<p3>Год: {{image.year}}</p3>
+							</div>
+						</a>
+						<!--<a><img src="../static/images/pictures/American_Gothic.jpg" alt="American_Gothic"><div><p1>Автор: Грант Вуд</p1><p2>Американская готика</p2><p3>Год: 1930</p3></div></a>
+						<a><img src="../static/images/pictures/Vincent_van_Gogh.jpg" alt="Vincent_van_Gogh"><div><p1>Автор: Винсент ван Гог</p1><p2>Автопортрет с палитрой</p2><p3>Год: 1889</p3></div></a>
+						<a><img src="../static/images/pictures/Untitled.png" alt="Untitled"><div><p1>Автор: Жан-Мишель Баския</p1><p2>Без названия</p2><p3>Год: 1982</p3></div></a>
+						<a><img src="../static/images/pictures/Starry_Night.jpg" alt="Starry_Night"><div><p1>Автор: Винсент ван Гог</p1><p2>Звёздная ночь</p2><p3>Год: 1889</p3></div></a>
+						<a><img src="../static/images/pictures/Me_and_the_village.jpg" alt="Me_and_the_village"><div><p1>Автор: Марк Шагал</p1><p2>Я и деревня</p2><p3>Год: 1911</p3></div></a>
+						<a><img src="../static/images/pictures/Morning.jpg" alt="Morning"><div><p1>Автор: Татьяна Яблонская</p1><p2>Утро</p2><p3>Год: 1954</p3></div></a>
+						<a><img src="../static/images/pictures/Girl_with_a_Pearl_Earring.jpg" alt="Girl_with_a_Pearl_Earring"><div><p1>Автор: Ян Вермеер</p1><p2>Девушка с жемчужной серёжкой</p2><p3>Год: 1665</p3></div></a>
+						<a><img src="../static/images/pictures/Tournesols.jpg" alt="Tournesols"><div><p1>Автор: Винсент ван Гог</p1><p2>Подсолнухи</p2><p3>Год: 1888</p3></div></a>
+						<a><img src="../static/images/pictures/Venera.jpg" alt="Venera"><div><p1>Автор: Сандро Боттичелли</p1><p2>Рождение Венеры</p2><p3>Год: 1482</p3></div></a>
+						<a><img src="../static/images/pictures/Interchange.jpg" alt="Interchange"><div><p1>Автор: Виллем де Кунинг</p1><p2>Обмен</p2><p3>Год: 1955</p3></div></a>-->
+						{% endfor %}
+					</section>
+				</article>
+
+				<div class="addPictures">
+					<a href="addpictures">+</a>
+					<span>Добавить ещё</span>
+				</div>
+			</main>
+		</div>
+		<script src="../static/javascripts/mainLogic.js"></script>
+{% endblock %}
